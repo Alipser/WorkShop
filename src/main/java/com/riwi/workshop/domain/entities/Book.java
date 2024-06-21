@@ -30,9 +30,13 @@ public class Book {
     @Column(name = "isbn", length = 20)
     private String isbn;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book",
+    fetch = FetchType.LAZY,
+cascade = CascadeType.ALL)
     private List<Reservation> reservations;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book",
+    fetch = FetchType.LAZY,
+cascade = CascadeType.ALL)
     private List<Loan> loans;
 }
