@@ -55,9 +55,17 @@ public class UserController {
         return ResponseEntity.ok(userService.getById(id));
     }
 
-    @GetMapping("/getBy/{id}/full")
+    @GetMapping("/getBy/{id}/loans")
     public ResponseEntity<UserResponseDto> getMethodIdFull(@PathVariable int id) {
-        return ResponseEntity.ok(userService.getFullWithID(id));
+        UserResponseDto userResponseDto = userService.getFullWithID(id);
+        userResponseDto.setReservations(null);
+        return ResponseEntity.ok(userResponseDto);
+    }
+    @GetMapping("/getBy/{id}/reservetion")
+    public ResponseEntity<UserResponseDto> getMethodIdFull2(@PathVariable int id) {
+        UserResponseDto userResponseDto = userService.getFullWithID(id);
+        userResponseDto.setLoans(null);
+        return ResponseEntity.ok(userResponseDto);
     }
 
     @DeleteMapping("/delete/{id}")

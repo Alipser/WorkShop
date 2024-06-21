@@ -57,7 +57,7 @@ public class BookController {
         return ResponseEntity.ok(bookService.getById(id));
     }
 
-    @GetMapping("/getBy/{id}/full")
+    @GetMapping("/getBy/{id}/reservations")
     public ResponseEntity<BookResponseDto> getMethodIdFull(@PathVariable int id) {
         return ResponseEntity.ok(bookService.getFullWithID(id));
     }

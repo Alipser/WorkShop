@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 import com.riwi.workshop.api.dtos.request.BookRequestDto;
 import com.riwi.workshop.api.dtos.responses.BookResponseBasic;
 import com.riwi.workshop.api.dtos.responses.BookResponseDto;
+import com.riwi.workshop.domain.entities.Book;
+
 import com.riwi.workshop.domain.repositories.BookRepository;
 import com.riwi.workshop.infrastructure.abstractservices.IBookService;
+import com.riwi.workshop.utils.exceptcions.IdNotFoundException;
 import com.riwi.workshop.utils.mappers.BookMapper;
+
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -35,32 +39,34 @@ public class BookService implements IBookService {
 
     @Override
     public BookResponseBasic create(BookRequestDto request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        Book entityforsaving = mapper.toEntity(request);
+        BookResponseBasic response = mapper.toResponseBasic(repository.save(entityforsaving));
+        return response;
     }
 
     @Override
     public BookResponseBasic update(BookRequestDto request, Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Book entityforsaving = mapper.toEntity(request);
+        BookResponseBasic response = mapper.toResponseBasic(repository.save(entityforsaving));
+        return response;
     }
 
     @Override
     public void delete(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repository.findById(id).orElseThrow(()->new IdNotFoundException("Book"));
+        repository.deleteById(id);
     }
 
     @Override
     public BookResponseBasic getById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+     Book BookEntity = repository.findById(id).orElseThrow(()->new IdNotFoundException("Book"));
+        return mapper.toResponseBasic(BookEntity);
     }
 
     @Override
     public BookResponseDto getFullWithID(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getFullWithID'");
+        Book BookEntity = repository.findById(id).orElseThrow(()->new IdNotFoundException("Book"));
+        return mapper.toResponse(BookEntity);
     }
     
 }

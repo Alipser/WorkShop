@@ -5,13 +5,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+
 import com.riwi.workshop.api.dtos.request.ReservationRequestDto;
-
 import com.riwi.workshop.api.dtos.responses.ReservationResponseDto;
-
+import com.riwi.workshop.domain.entities.Reservation;
 import com.riwi.workshop.domain.repositories.ReservationRepository;
 import com.riwi.workshop.infrastructure.abstractservices.IReservationService;
-
+import com.riwi.workshop.utils.exceptcions.IdNotFoundException;
 import com.riwi.workshop.utils.mappers.ReservationMapper;
 
 import jakarta.transaction.Transactional;
@@ -37,26 +37,28 @@ public class ReservationService implements IReservationService{
 
     @Override
     public ReservationResponseDto create(ReservationRequestDto request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        Reservation entityforsaving = mapper.toEntity(request);
+        ReservationResponseDto response = mapper.toResponse(repository.save(entityforsaving));
+        return response;
     }
 
     @Override
     public ReservationResponseDto update(ReservationRequestDto request, Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        Reservation entityforsaving = mapper.toEntity(request);
+        ReservationResponseDto response = mapper.toResponse(repository.save(entityforsaving));
+        return response;
     }
 
     @Override
     public void delete(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repository.findById(id).orElseThrow(() -> new IdNotFoundException("Reservation"));
+        repository.deleteById(id);
     }
 
     @Override
     public ReservationResponseDto getById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        Reservation BookEntity = repository.findById(id).orElseThrow(() -> new IdNotFoundException("Reservation"));
+        return mapper.toResponse(BookEntity);
     }
     
 }
