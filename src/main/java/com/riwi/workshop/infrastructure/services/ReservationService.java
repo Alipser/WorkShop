@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.riwi.workshop.api.dtos.request.ReservationRequestDto;
-import com.riwi.workshop.api.dtos.responses.LoanResponseDto;
+
 import com.riwi.workshop.api.dtos.responses.ReservationResponseDto;
 
 import com.riwi.workshop.domain.repositories.ReservationRepository;

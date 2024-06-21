@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.riwi.workshop.api.dtos.request.BookRequestDto;
+
 import com.riwi.workshop.api.dtos.request.ReservationRequestDto;
-import com.riwi.workshop.api.dtos.responses.BookResponseBasic;
-import com.riwi.workshop.api.dtos.responses.BookResponseDto;
+
+
 import com.riwi.workshop.api.dtos.responses.ReservationResponseDto;
-import com.riwi.workshop.infrastructure.abstractservices.ILoanService;
+
 import com.riwi.workshop.infrastructure.abstractservices.IReservationService;
 
 import lombok.AllArgsConstructor;
